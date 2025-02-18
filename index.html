@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Motion Graphics Moodboard</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f8f9fa;
+			margin: 0;
+			padding: 20px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.header {
+			text-align: center;
+			margin-bottom: 20px;
+		}
+
+		.header h1 {
+			font-size: 2.5em;
+			margin: 0;
+			color: #111;
+		}
+
+		.header p {
+			font-size: 1.2em;
+			color: #222;
+			margin: 5px 0 20px;
+		}
+
+		.gallery {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+			gap: 15px;
+			width: 100%;
+			max-width: 1200px;
+		}
+
+		.gallery img {
+			width: 100%;
+			height: auto;
+			border-radius: 15px;
+			object-fit: contain;
+			opacity: 0;
+			transform: scale(0.9);
+			transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
+		}
+
+		.gallery img.loaded {
+			opacity: 1;
+			transform: scale(1);
+		}
+
+		.gallery img.visible {
+			opacity: 1;
+			transition: opacity 0.25s ease-in-out;
+		}
+
+		.gallery img.hidden {
+			opacity: 0;
+			transition: opacity 0.25s ease-in-out;
+		}
+
+		@media (min-width: 800px) {
+			.gallery {
+				grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="header">
+		<h1>Motion Graphics Moodboard</h1>
+		<!-- p -->
+	</div>
+	<div class="gallery">
+		<img src="/motion/motion_01.gif">
+		<img src="/motion/motion_02.gif">
+		<img src="/motion/motion_03.gif">
+		<img src="/motion/motion_04.gif">
+		<img src="/motion/motion_05.gif">
+		<img src="/motion/motion_06.gif">
+		<img src="/motion/motion_07.gif">
+		<img src="/motion/motion_08.gif">
+		<img src="/motion/motion_09.gif">
+		<img src="/motion/motion_10.gif">
+		<img src="/motion/motion_11.gif">
+		<img src="/motion/motion_12.gif">
+		<img src="/motion/motion_13.gif">
+		<img src="/motion/motion_14.gif">
+		<img src="/motion/motion_15.gif">
+		<img src="/motion/motion_16.gif">
+		<img src="/motion/motion_17.gif">
+		<img src="/motion/motion_18.gif">
+		<img src="/motion/motion_19.gif">
+		<img src="/motion/motion_20.gif">
+		<img src="/motion/motion_21.gif">
+		<img src="/motion/motion_22.gif">
+		<img src="/motion/motion_23.gif">
+		<img src="/motion/motion_24.gif">
+		<img src="/motion/motion_25.gif">
+		<img src="/motion/motion_26.gif">
+		<img src="/motion/motion_27.gif">
+		<img src="/motion/motion_28.gif">
+		<img src="/motion/motion_29.gif">
+		<img src="/motion/motion_30.gif">
+		<img src="/motion/motion_31.gif">
+		<img src="/motion/motion_32.gif">
+	</div>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", () => {
+			const gallery = document.querySelector('.gallery');
+			const images = Array.from(gallery.querySelectorAll('img'));
+			const shuffledImages = images.sort(() => Math.random() - 0.5);
+			shuffledImages.forEach(image => gallery.appendChild(image));
+
+			const observer = new IntersectionObserver((entries) => {
+				entries.forEach(({isIntersecting, target}) => {
+					target.classList.toggle("visible", isIntersecting);
+					target.classList.toggle("hidden", !isIntersecting);
+					if (isIntersecting) target.classList.add("loaded");
+				});
+			}, {threshold: 0.25});
+			document.querySelectorAll(".gallery img").forEach(img => observer.observe(img));
+		});
+	</script>
+</body>
+
+</html>
